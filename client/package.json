@@ -1,5 +1,5 @@
 {
-  "name": "Debate Game",
+  "name": "wp5-starter-react",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --mode production",
@@ -8,7 +8,6 @@
     "start:live": "webpack-dev-server --open --mode development --liveReload",
     "heroku-postbuild": "webpack -p"
   },
-  "proxy": "http://localhost:4000/",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "7.9.6",

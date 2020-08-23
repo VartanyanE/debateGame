@@ -41,6 +41,12 @@ const POST_MESSAGE = gql`
   }
 `;
 
+const DELETE_MESSAGE = gql`
+  mutation($user: String!, $content: String!) {
+    deleteMessage(user: $user, content: $content)
+  }
+`;
+
 const Messages = ({ user }) => {
   const [toggle, on] = useState(false);
   const { data } = useSubscription(GET_MESSAGES);
@@ -98,6 +104,15 @@ const Chat = () => {
     content: "",
   });
   const [postMessage] = useMutation(POST_MESSAGE);
+  const [deleteMessage] = useMutation(DELETE_MESSAGE);
+  const onDelete = () => {
+    deleteMessage({
+      variables: {
+        user: "",
+        content: "",
+      },
+    });
+  };
   const onSend = () => {
     if (state.content.length > 0) {
       postMessage({
@@ -127,7 +142,7 @@ const Chat = () => {
               }
             />
           </Col>
-          <Col xs={8}>
+          <Col xs={6}>
             <FormInput
               style={{ backgroundColor: "#BCE6FA" }}
               label="Content"
@@ -151,13 +166,25 @@ const Chat = () => {
               color="#000000"
               onClick={() => onSend()}
               style={{
-                width: "100%",
                 backgroundColor: "black",
                 color: "white",
                 fontFamily: " Oswald",
               }}
             >
               Shoot
+            </Button>
+          </Col>
+          <Col xs={2} style={{ padding: 0 }}>
+            {" "}
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => onDelete()}
+              style={{
+                fontFamily: " Oswald",
+              }}
+            >
+              DESTROY
             </Button>
           </Col>
         </Row>
