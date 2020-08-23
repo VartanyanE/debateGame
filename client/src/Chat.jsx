@@ -59,27 +59,26 @@ const Messages = ({ user }) => {
               paddingBottom: "1em",
             }}
           >
-            {user !== messageUser && (
-              <div
-                style={{
-                  height: 50,
-                  width: 50,
-                  marginRight: "0.5em",
-                  border: "2px solid #ffffff",
-                  borderRadius: 25,
-                  textAlign: "center",
-                  fontSize: "18pt",
-                  paddingTop: 5,
-                }}
-              >
-                {messageUser.slice(0, 2).toUpperCase()}
-              </div>
-            )}
+            <div
+              style={{
+                height: 50,
+                width: 50,
+                marginRight: "0.5em",
+                border: "2px solid #ffffff",
+                borderRadius: 25,
+                textAlign: "center",
+                fontSize: "10pt",
+                paddingTop: 5,
+              }}
+            >
+              {messageUser.slice(0, 4).toUpperCase()}
+            </div>
+
             <div
               style={{
                 background: user === messageUser ? "blue" : "#e5e6ea",
                 color: user === messageUser ? "#ffffff" : "black",
-                padding: "1em",
+                padding: "10px",
                 borderRadius: "1em",
                 maxWidth: "60%",
                 height: "60%",
@@ -155,6 +154,7 @@ const Chat = () => {
                 width: "100%",
                 backgroundColor: "black",
                 color: "white",
+                fontFamily: " Oswald",
               }}
             >
               Shoot

@@ -1,17 +1,15 @@
 {
-  "name": "wp5-starter-react",
+  "name": "Debate Game",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "start": "webpack-dev-server --open --mode development",
-    "start:live": "webpack-dev-server --open --mode development --liveReload"
+    "start:live": "webpack-dev-server --open --mode development --liveReload",
+    "heroku-postbuild": "npm run build"
   },
+  "proxy": "http://localhost:4000/",
   "license": "MIT",
-  "author": {
-    "name": "Jack Herrington",
-    "email": "jherr@pobox.com"
-  },
   "devDependencies": {
     "@babel/core": "7.9.6",
     "@babel/preset-env": "^7.10.3",
