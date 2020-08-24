@@ -10,7 +10,7 @@ import {
 } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { Container, Row, Col, FormInput } from "shards-react";
-import { Button } from "@material-ui/core";
+import { Button, Avatar } from "@material-ui/core";
 
 const link = new WebSocketLink({
   uri: `ws://localhost:4000/`,
@@ -49,14 +49,25 @@ const DELETE_MESSAGE = gql`
 
 const Messages = ({ user }) => {
   const [toggle, on] = useState(false);
+  const [secondsLeft, updateSeconds] = useState(60);
   const { data } = useSubscription(GET_MESSAGES);
   if (!data) {
     return null;
   }
+  let startTime = () => {
+    console.log("fires");
+    on(true);
+    setInterval(() => {
+      updateSeconds((secondsLeft) => secondsLeft - 1);
+    }, 1000);
+  };
 
   return (
     <>
       <div className="chatWindow">
+        <Button onClick={startTime}>
+          {!toggle ? <h5>Start Battle</h5> : secondsLeft}
+        </Button>
         {data.messages.map(({ id, user: messageUser, content }) => (
           <div
             style={{
@@ -65,7 +76,24 @@ const Messages = ({ user }) => {
               paddingBottom: "1em",
             }}
           >
-            <div
+            <Avatar
+              style={{
+                height: 30,
+                width: 30,
+                marginRight: "0.5em",
+                border: "2px solid #ffffff",
+                borderRadius: 25,
+                textAlign: "center",
+                fontSize: "10pt",
+              }}
+              // className={classes.avatar}
+              src={
+                "https://avatars.dicebear.com/api/initials/" +
+                messageUser +
+                ".svg"
+              }
+            />
+            {/* <div
               style={{
                 height: 50,
                 width: 50,
@@ -78,7 +106,7 @@ const Messages = ({ user }) => {
               }}
             >
               {messageUser.slice(0, 4).toUpperCase()}
-            </div>
+            </div> */}
 
             <div
               style={{
@@ -169,6 +197,7 @@ const Chat = () => {
                 backgroundColor: "black",
                 color: "white",
                 fontFamily: " Oswald",
+                border: "2px solid #ffffff",
               }}
             >
               Shoot
