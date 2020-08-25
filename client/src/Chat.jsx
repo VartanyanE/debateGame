@@ -21,7 +21,7 @@ const link = new WebSocketLink({
 
 const client = new ApolloClient({
   link,
-  uri: "http://localhost:4000/",
+  uri: "/graphql",
   cache: new InMemoryCache(),
 });
 
