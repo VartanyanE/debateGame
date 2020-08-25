@@ -73,6 +73,7 @@ const server = new ApolloServer({
   engine: {
     reportSchema: true,
     variant: "current",
+    playground: true,
   },
 });
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
