@@ -1,4 +1,5 @@
 const { GraphQLServer, PubSub } = require("graphql-yoga");
+require("dotenv").config();
 
 const messages = [];
 
@@ -64,7 +65,15 @@ const resolvers = {
 };
 
 const pubsub = new PubSub();
-const server = new GraphQLServer({ typeDefs, resolvers, context: { pubsub } });
+const server = new GraphQLServer({
+  typeDefs,
+  resolvers,
+  context: { pubsub },
+  engine: {
+    reportSchema: true,
+    variant: "current",
+  },
+});
 server.start({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
