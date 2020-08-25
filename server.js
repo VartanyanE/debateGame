@@ -1,4 +1,5 @@
 const { GraphQLServer, PubSub } = require("graphql-yoga");
+const { ApolloServer, gql } = require("apollo-server");
 require("dotenv").config();
 
 const messages = [];
@@ -65,7 +66,7 @@ const resolvers = {
 };
 
 const pubsub = new PubSub();
-const server = new GraphQLServer({
+const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: { pubsub },
@@ -74,6 +75,6 @@ const server = new GraphQLServer({
     variant: "current",
   },
 });
-server.start({ port: process.env.PORT || 4000 }).then(({ url }) => {
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
